@@ -5,26 +5,36 @@ import (
 	"testing"
 )
 
-func TestExercise1(t *testing.T) {
+func TestExercise1_1(t *testing.T) {
 	inputs := []int{1, 2, 3, 4}
 
 	if pattern1.HasSumPair(inputs) == false {
-		t.Fatal("Exercise 1 fails")
+		t.Fatal("Exercise 1-1 fails")
 	}
 }
 
-func TestExercise2(t *testing.T) {
+func TestExercise1_2(t *testing.T) {
 	inputs := []int{1, 1, 3, 4, 7}
 
 	if pattern1.HasSumPair(inputs) == false {
-		t.Fatal("Exercise 2 fails")
+		t.Fatal("Exercise 1-2 fails")
 	}
 }
 
-func TestExercise3(t *testing.T) {
+func TestExercise1_3(t *testing.T) {
 	inputs := []int{2, 3, 4, 6}
 
 	if pattern1.HasSumPair(inputs) == true {
-		t.Fatal("Exercise 3 fails")
+		t.Fatal("Exercise 1-3 fails")
 	}
 }
+
+func TestExercise2_1(t *testing.T) {
+    inputs := []int{1, 2, 3, 7}
+    target := 6
+
+    if pattern1.HasSubsetSum(target, inputs) == false{
+        t.Fatal("Exercise 2-1 fails")
+    }
+}
+
