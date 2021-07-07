@@ -60,3 +60,19 @@ func HasSumPair(list []int) bool {
 
 	return HasSubsetSum(target, list)
 }
+
+/*
+   Given a set of positive numbers, partition the set into two subsets with a minimum difference between their subset sums.
+*/
+func HasSumPairMinimumDistance(distance int, list []int) bool {
+	target := getTarget(list)
+	if target%2 != 0 {
+		target = target - distance
+		if target%2 != 0 {
+			return false
+		}
+	}
+	target = target / 2
+
+	return HasSubsetSum(target, list)
+}
