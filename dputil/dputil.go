@@ -19,3 +19,12 @@ func MakeDpBoolTable(rowSize int, columnSize int) [][]bool {
 	return dpTable
 }
 
+func MakeDpIntTable(rowSize int, columnSize int) [][]int {
+	dpTable := make([][]int, rowSize)
+	for i := 0; i < rowSize; i++ {
+		dpTable[i] = make([]int, columnSize)
+	}
+
+	return dpTable
+}
+

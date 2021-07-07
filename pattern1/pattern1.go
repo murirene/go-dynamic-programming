@@ -59,3 +59,41 @@ func HasSumPairMinimumDistance(distance int, list []int) bool {
 
 	return HasSubsetSum(target, list)
 }
+
+// Given a set of positive numbers, find the total number of subsets whose sum is equal to a given number ‘S’.
+/*
+
+    1, 1, 2, 3
+    4
+           0 1 2 3 4
+           0 0 0 0 0
+1          0 1 0 0 0
+1,1        0 2 1 0 0
+1,1,2      0 2 2 2 1
+1,1,2, 3   0 2 2 3 3
+
+*/
+
+func SubsetCount(target int, list []int) int {
+	dpTable := dputil.MakeDpIntTable(len(list)+1, target+1)
+	for i := 1; i <= len(list); i++ {
+		for j := 1; j <= target; j++ {
+			dpTable[i][j] = dpTable[i-1][j]
+			if list[i-1] > j {
+				continue
+			}
+
+			if list[i-1] == j {
+				dpTable[i][j] = dpTable[i][j] + 1
+				continue
+			}
+
+			partIndex := j - list[i-1]
+			if dpTable[i-1][partIndex] > 0 {
+				dpTable[i][j] = dpTable[i-1][partIndex] + dpTable[i][j]
+			}
+		}
+	}
+
+	return dpTable[len(list)][target]
+}

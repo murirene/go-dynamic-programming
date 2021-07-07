@@ -82,3 +82,21 @@ func TestExercise3_3(t *testing.T) {
 		t.Fatal("Exercise 3-3 fails")
 	}
 }
+
+func TestExercise4_1(t *testing.T) {
+	inputs := []int{1, 1, 2, 3}
+	target := 4
+
+	if pattern1.SubsetCount(target, inputs) != 3 {
+		t.Fatal("Exercise 4-1 fails")
+	}
+}
+
+func TestExercise4_2(t *testing.T) {
+	inputs := []int{1, 2, 7, 1, 5}
+	target := 9
+
+	if pattern1.SubsetCount(target, inputs) != 3 {
+		t.Fatal("Exercise 4-2 fails")
+	}
+}
