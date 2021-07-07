@@ -30,11 +30,32 @@ func TestExercise1_3(t *testing.T) {
 }
 
 func TestExercise2_1(t *testing.T) {
-    inputs := []int{1, 2, 3, 7}
-    target := 6
+	inputs := []int{1, 2, 3, 7}
+	target := 6
 
-    if pattern1.HasSubsetSum(target, inputs) == false{
-        t.Fatal("Exercise 2-1 fails")
-    }
+	if pattern1.HasSubsetSum(target, inputs) == false {
+		t.Fatal("Exercise 2-1 fails")
+	}
 }
+
+
+func TestExercise2_2(t *testing.T) {
+	inputs := []int{1, 2, 7, 1, 5}
+	target := 10 
+
+	if pattern1.HasSubsetSum(target, inputs) == false {
+		t.Fatal("Exercise 2-2 fails")
+	}
+}
+
+
+func TestExercise2_3(t *testing.T) {
+	inputs := []int{1, 3, 4, 8}
+	target := 6
+
+	if pattern1.HasSubsetSum(target, inputs) == true {
+		t.Fatal("Exercise 2-3 fails")
+	}
+}
+
 
