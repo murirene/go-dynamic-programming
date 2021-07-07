@@ -1,27 +1,10 @@
 package pattern1
 
-func getTarget(list []int) int {
-	target := 0
-
-	for _, v := range list {
-		target += v
-	}
-
-	return target
-}
-
-func makeDpTable(rowSize int, columnSize int) [][]bool {
-	dpTable := make([][]bool, rowSize)
-	for i := 0; i < rowSize; i++ {
-		dpTable[i] = make([]bool, columnSize)
-	}
-
-	return dpTable
-}
+import "github.com/murirene/go-dynamic-programming/dputil"
 
 // Given a set of positive numbers, determine if there exists a subset whose sum is equal to a given number ‘S’.
 func HasSubsetSum(target int, list []int) bool {
-	dpTable := makeDpTable(len(list)+1, target+1)
+	dpTable := dputil.MakeDpBoolTable(len(list)+1, target+1)
 	for i := 1; i <= len(list); i++ {
 		for j := 1; j <= target; j++ {
 			dpTable[i][j] = dpTable[i-1][j]
@@ -50,7 +33,7 @@ func HasSubsetSum(target int, list []int) bool {
    given
 */
 func HasSumPair(list []int) bool {
-	target := getTarget(list)
+	target := dputil.GetSum(list)
 
 	if target%2 != 0 {
 		return false
@@ -65,7 +48,7 @@ func HasSumPair(list []int) bool {
    Given a set of positive numbers, partition the set into two subsets with a minimum difference between their subset sums.
 */
 func HasSumPairMinimumDistance(distance int, list []int) bool {
-	target := getTarget(list)
+	target := dputil.GetSum(list)
 	if target%2 != 0 {
 		target = target - distance
 		if target%2 != 0 {
