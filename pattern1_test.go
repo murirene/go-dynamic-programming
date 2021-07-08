@@ -100,3 +100,21 @@ func TestExercise4_2(t *testing.T) {
 		t.Fatal("Exercise 4-2 fails")
 	}
 }
+
+func TestExercise5_1(t *testing.T) {
+	inputs := []int{1, 1, 2, 3}
+	target := 1
+
+	if pattern1.TargetSum(target, inputs) != 3 {
+		t.Fatal("Exercise 5-1 fails")
+	}
+}
+
+func TestExercise5_2(t *testing.T) {
+	inputs := []int{1, 2, 7, 1}
+	target := 9
+
+	if pattern1.TargetSum(target, inputs) != 2 {
+		t.Fatal("Exercise 5-2 fails")
+	}
+}

@@ -97,3 +97,22 @@ func SubsetCount(target int, list []int) int {
 
 	return dpTable[len(list)][target]
 }
+
+/*
+Input: {1, 1, 2, 3}, S=1
+Output: 3
+Explanation: The given set has '3' ways to make a sum of '1': {+1-1-2+3} & {-1+1-2+3} & {+1+1+2-3}
+
+(3-2) + (1-1) = 1
+Sum(s1) - Sum(s2) = S
+Sum(s1) + Sum(s2) = Sum(num)
+2Sum(s1)= Sum(num) + S
+Sum(s1) = (Sum(num) + S ) / 2
+
+*/
+
+func TargetSum(target int, list []int) int {
+	sum := dputil.GetSum(list)
+	target = (target + sum) / 2
+	return SubsetCount(target, list)
+}
