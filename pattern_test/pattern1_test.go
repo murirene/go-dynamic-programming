@@ -1,4 +1,4 @@
-package pattern1_test
+package pattern_test
 
 import (
 	"github.com/murirene/go-dynamic-programming/pattern1"
