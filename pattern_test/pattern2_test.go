@@ -26,3 +26,14 @@ func TestExercise1_2(t *testing.T) {
 	}
 
 }
+
+func TestExercise2_1(t *testing.T) {
+	profits := []int{2, 6, 7, 10, 13}
+	lengths := []int{1, 2, 3, 4, 5}
+	capacity := 5
+
+	if pattern2.RodCutOptimalProfit(lengths, profits, capacity) != 14 {
+		t.Fatal("Exercise 2-1 failed")
+	}
+
+}

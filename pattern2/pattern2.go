@@ -1,5 +1,7 @@
 package pattern2
 
+import "fmt"
+
 // C capacity
 // Weights {1, 2, 3}
 // Profits {15, 20, 50}
@@ -32,4 +34,39 @@ func UnboundKnapsack(weights []int, profits []int, capacity int) int {
 	}
 
 	return dpTable[len(weights)][capacity]
+}
+
+/*
+prices 2, 6, 7, 10, 13
+
+            0   1   2   3   4   5
+1           0   2   4   6   8   10
+1,2         0   2   6   8   12  14
+1,2,3       0   2   6
+1,2,3,4     0
+1,2,3,4,5   0
+
+*/
+
+func RodCutOptimalProfit(lengths []int, prices []int, rodLength int) int {
+	dp := make([][]int, len(lengths)+1)
+	for i := range dp {
+		dp[i] = make([]int, rodLength+1)
+	}
+
+	for i := 1; i <= len(lengths); i++ {
+		for j := 1; j <= rodLength; j++ {
+			dp[i][j] = dp[i-1][j]
+			if lengths[i-1] > j {
+				continue
+			}
+
+			rodWithLength := dp[i][j-lengths[i-1]] + prices[i-1]
+			if dp[i][j] < rodWithLength {
+				dp[i][j] = rodWithLength
+			}
+		}
+	}
+	
+    return dp[len(lengths)][rodLength]
 }
