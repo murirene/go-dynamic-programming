@@ -1,7 +1,5 @@
 package pattern2
 
-import "fmt"
-
 // C capacity
 // Weights {1, 2, 3}
 // Profits {15, 20, 50}
@@ -67,6 +65,36 @@ func RodCutOptimalProfit(lengths []int, prices []int, rodLength int) int {
 			}
 		}
 	}
-	
-    return dp[len(lengths)][rodLength]
+
+	return dp[len(lengths)][rodLength]
+}
+
+/*
+       0    1   2   3   4   5
+       0    0   0   0   0   0
+1      0    1   1   1   1   1
+1,2    0    1   2   2   3   3
+1,2,3  0    1   2   3   4   5
+*/
+
+func CoinChangeCount(denominations []int, amount int) int {
+	dp := make([][]int, len(denominations)+1)
+	for i := range dp {
+		dp[i] = make([]int, amount+1)
+	}
+
+	for dIndex := 1; dIndex <= len(denominations); dIndex++ {
+		for a := 1; a <= amount; a++ {
+			dp[dIndex][a] = dp[dIndex-1][a]
+
+			if denominations[dIndex-1] > a {
+				continue
+			}
+
+			if dp[dIndex][a] < (dp[dIndex][a-denominations[dIndex-1]] + 1) {
+				dp[dIndex][a] = dp[dIndex][a-denominations[dIndex-1]] + 1
+			}
+		}
+	}
+	return dp[len(denominations)][amount]
 }

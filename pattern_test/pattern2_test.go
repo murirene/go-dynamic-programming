@@ -37,3 +37,13 @@ func TestExercise2_1(t *testing.T) {
 	}
 
 }
+
+func TestExercise3_1(t *testing.T) {
+	denominations := []int{1, 2, 3}
+	amount := 5
+
+	if pattern2.CoinChangeCount(denominations, amount) != 5 {
+		t.Fatal("Exercise 3-1 failed")
+	}
+
+}
