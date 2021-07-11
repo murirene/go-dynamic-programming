@@ -98,3 +98,28 @@ func CoinChangeCount(denominations []int, amount int) int {
 	}
 	return dp[len(denominations)][amount]
 }
+
+func MinimumCoinChangeCount(denoms []int, amount int) int {
+	dp := make([][]int, len(denoms)+1)
+	for i := range dp {
+		dp[i] = make([]int, amount+1)
+	}
+
+	for denomIdx := 1; denomIdx <= len(denoms); denomIdx++ {
+		for amt := 1; amt <= amount; amt++ {
+			dp[denomIdx][amt] = dp[denomIdx-1][amt]
+
+			if denoms[denomIdx-1] > amt {
+				continue
+			}
+
+			if dp[denomIdx][amt] == 0 {
+				dp[denomIdx][amt] = dp[denomIdx][amt-denoms[denomIdx-1]] + 1
+			} else if dp[denomIdx][amt] > dp[denomIdx][amt-denoms[denomIdx-1]]+1 {
+				dp[denomIdx][amt] = dp[denomIdx][amt-denoms[denomIdx-1]] + 1
+			}
+		}
+	}
+
+	return dp[len(denoms)][amount]
+}
