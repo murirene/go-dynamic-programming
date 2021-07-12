@@ -53,7 +53,34 @@ func TestExercise4_1(t *testing.T) {
 	amount := 5
 
 	if pattern2.MinimumCoinChangeCount(denominations, amount) != 2 {
-		t.Fatal("Exercise 3-1 failed")
+		t.Fatal("Exercise 4-1 failed")
 	}
 
+}
+
+func TestExercise5_1(t *testing.T) {
+	ribbonLengths := []int{2, 3, 5}
+	cut := 5
+
+	if pattern2.MaxRibbonCut(ribbonLengths, cut) != 2 {
+		t.Fatal("Exercise 5-1 failed")
+	}
+}
+
+func TestExercise5_2(t *testing.T) {
+	ribbonLengths := []int{2, 3}
+	cut := 7
+
+	if pattern2.MaxRibbonCut(ribbonLengths, cut) != 3 {
+		t.Fatal("Exercise 5-2 failed")
+	}
+}
+
+func TestExercise5_3(t *testing.T) {
+	ribbonLengths := []int{3, 5, 7}
+	cut := 13
+
+	if pattern2.MaxRibbonCut(ribbonLengths, cut) != 3 {
+		t.Fatal("Exercise 5-3 failed")
+	}
 }

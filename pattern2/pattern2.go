@@ -123,3 +123,35 @@ func MinimumCoinChangeCount(denoms []int, amount int) int {
 
 	return dp[len(denoms)][amount]
 }
+
+/*
+        0   1    2   3   4   5
+        0   0    0   0   0   0
+2       0   0    1   0   2   0
+2,3     0   0    1   1   2   2
+2,3,5   0   0    1   1   2   2
+*/
+func MaxRibbonCut(rlengths []int, n int) int {
+	dp := make([][]int, len(rlengths)+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+
+	for i := 1; i <= len(rlengths); i++ {
+		for length := 1; length <= n; length++ {
+			dp[i][length] = dp[i-1][length]
+			if rlengths[i-1] > length {
+				continue
+			}
+
+			index := length - rlengths[i-1]
+			if index == 0 && dp[i][length] < (dp[i][index]+1) {
+				dp[i][length] = dp[i][index] + 1
+			} else if dp[i][index] > 0 && dp[i][length] < (dp[i][index]+1) {
+				dp[i][length] = dp[i][index] + 1
+			}
+		}
+	}
+
+	return dp[len(rlengths)][n]
+}
