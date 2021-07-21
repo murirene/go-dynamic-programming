@@ -18,3 +18,14 @@ func TestFib(t *testing.T) {
 		t.Fatal("Failed 3-1")
 	}
 }
+
+func TestStaircase(t *testing.T) {
+    if pattern3.StaircaseRecursive(4) != 7 {
+        t.Fatal("Fatal 3-2")
+    }
+
+
+    if pattern3.StaircaseRecursive(5) != 13 {
+        t.Fatal("Fatal 3-3")
+    }
+}
