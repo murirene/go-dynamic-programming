@@ -83,5 +83,56 @@ func StaircaseTabular(n int) int {
 	}
 
 	return dp[n]
+}
 
+func CountWays(n int) int {
+	dp := make([]int, n+1)
+	for i := range dp {
+		dp[i] = -1
+	}
+
+	return countWays(n, dp)
+}
+
+func countWays(n int, dp []int) int {
+	if n < 0 {
+		return 0
+	}
+
+	if n == 0 {
+		return 1
+	}
+
+	if dp[n] == -1 {
+		way1 := countWays(n-1, dp)
+		way2 := countWays(n-3, dp)
+		way3 := countWays(n-4, dp)
+
+		dp[n] = way1 + way2 + way3
+	} else {
+		fmt.Println("cache!!")
+	}
+
+	return dp[n]
+}
+
+func CountWaysTabular(n int) int {
+	dp := make([]int, n+1)
+
+	if n <= 0 {
+		return 0
+	}
+
+	if n < 2 {
+		return 1
+	}
+
+	dp[1] = 1
+	dp[2] = 1
+	dp[3] = 2
+	dp[4] = 4
+	for i := 5; i <= n; i++ {
+		dp[i] = dp[i-3] + dp[i-4] + dp[i-1]
+	}
+	return dp[n]
 }

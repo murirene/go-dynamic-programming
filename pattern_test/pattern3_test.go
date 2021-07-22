@@ -38,3 +38,19 @@ func TestStaircaseTabular(t *testing.T) {
 		t.Fatal("Fatal 3-3 tabular")
 	}
 }
+
+func TestCountWays(t *testing.T) {
+    if pattern3.CountWays(6) != 9 {
+        t.Fatal("Fatal 4-1")
+    }
+}
+
+func TestCountWaysTabular(t *testing.T) {
+    if pattern3.CountWaysTabular(5) != 6 {
+        t.Fatal("Fatal 4-2")
+    }
+
+    if pattern3.CountWaysTabular(6) != 9 {
+        t.Fatal("Fatal 4-3")
+    }
+}
