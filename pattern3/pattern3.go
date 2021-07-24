@@ -109,8 +109,6 @@ func countWays(n int, dp []int) int {
 		way3 := countWays(n-4, dp)
 
 		dp[n] = way1 + way2 + way3
-	} else {
-		fmt.Println("cache!!")
 	}
 
 	return dp[n]
@@ -135,4 +133,45 @@ func CountWaysTabular(n int) int {
 		dp[i] = dp[i-3] + dp[i-4] + dp[i-1]
 	}
 	return dp[n]
+}
+
+func minReachEnd(steps []int, index int) int {
+	const NO_VALID_PATH int = -1
+
+	if index+1 == len(steps) {
+		return 0
+	}
+
+	if index+1 >= len(steps) || steps[index] == 0 {
+		return NO_VALID_PATH
+	}
+
+	// take the step
+	way1 := minReachEnd(steps, index+steps[index])
+
+	// skip the step
+	way2 := minReachEnd(steps, index+1)
+
+	if way2 == NO_VALID_PATH && way1 == NO_VALID_PATH {
+		return NO_VALID_PATH
+	}
+
+	if way1 == NO_VALID_PATH {
+		return way2 + 1
+	}
+
+	if way2 == NO_VALID_PATH {
+		return way1 + 1
+	}
+
+	if way1 < way2 {
+		return way1 + 1
+	}
+
+	return way2 + 1
+}
+
+func MinReachEnd(steps []int) int {
+	step := minReachEnd(steps, 0)
+	return step
 }
