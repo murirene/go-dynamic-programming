@@ -1,5 +1,9 @@
 package pattern3
 
+import (
+	"math"
+)
+
 func Fib(n int) int {
 	if n == 0 {
 		return 0
@@ -174,4 +178,40 @@ func MinReachEnd(steps []int) int {
 	dp := make([]int, len(steps))
 	step := minReachEnd(steps, 0, dp)
 	return step
+}
+
+/*
+2,1,1,1,4
+
+i=0
+dp
+[ 0, 0 , 0, 0, 0]
+after
+[ 0 1, 1, 0, 0]a
+
+i=1
+[1, 2, 2, 0, 0]
+
+i=2
+[x1, 2, 1, 3, `]
+
+i=3
+*/
+
+func MinReachEndTabular(steps []int) int {
+	dp := make([]int, len(steps))
+	for i, _ := range dp {
+		dp[i] = math.MaxInt32
+	}
+	dp[0] = 0
+	for step := 0; step < len(steps); step++ {
+		if (step+1) < len(steps) && dp[step]+1 < dp[step+1] {
+			dp[step+1] = dp[step] + 1
+		}
+
+		if step+steps[step] < len(steps) && dp[step] < dp[step+steps[step]] {
+			dp[step+steps[step]] = dp[step] + 1
+		}
+	}
+	return dp[len(steps)-1]
 }

@@ -68,3 +68,18 @@ func TestStairCaseReachEnd2(t *testing.T) {
 		t.Fatal("Fatal 5-1")
 	}
 }
+
+
+func TestStairCaseReachEndTab(t *testing.T) {
+	list := []int{2, 1, 1, 1, 4}
+	if pattern3.MinReachEndTabular(list) != 3 {
+		t.Fatal("Fatal 5-1 Tab")
+	}
+}
+
+func TestStairCaseReachEnd2Tab(t *testing.T) {
+	list := []int{1, 1, 3, 6, 9, 3, 0, 1, 3}
+	if pattern3.MinReachEndTabular(list) != 4 {
+		t.Fatal("Fatal 5-2 Tab")
+	}
+}
