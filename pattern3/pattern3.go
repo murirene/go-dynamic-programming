@@ -255,3 +255,46 @@ func MinFeeReachEnd(steps []int) int {
 	}
 	return dp[len(dp)-1]
 }
+
+/*
+{2, 5, 1, 3, 6, 2, 4}
+
+2 , 1, 6, 4
+2, 3, , 2
+2, 6, 4
+5, 3, 2
+5, 6, 4
+5, 2
+5, 4
+
+[2, 5, 5, 8, 11, 11, 15
+[2, 5, 5, 8, 11, 11, 15 \
+
+
+{2, 10, 14, 8, 1}
+
+[2, 10, 16, 18, 18
+
+a[i] = math.Max(h[i]] + a[i-2], a[i-1)
+
+i=2
+[2, 10, 16, 18, 18
+
+*/
+func HouseTheif(houses []int) int {
+	dp := make([]int, len(houses))
+
+	for i := 0; i < len(houses); i++ {
+		dp[i] = houses[i]
+	}
+
+	for i := 2; i < len(houses); i++ {
+		if (houses[i] + dp[i-2]) < dp[i-1] {
+			dp[i] = dp[i-1]
+		} else {
+			dp[i] = houses[i] + dp[i-2]
+		}
+	}
+
+	return dp[len(dp)-1]
+}

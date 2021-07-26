@@ -96,3 +96,18 @@ func TestStairCaseMinFeeTabularT2(t *testing.T) {
 		t.Fatal("Failed Case 2")
 	}
 }
+
+func TestHouseTheif(t *testing.T) {
+    houses := []int{2, 5, 1, 3, 6, 2, 4}
+    if pattern3.HouseTheif(houses) != 15 {
+        t.Fatal("Failed House thief 1")
+    }
+}
+
+
+func TestHouseTheif2(t *testing.T) {
+    houses := []int{2, 10, 14, 8, 1}
+    if pattern3.HouseTheif(houses) != 18 {
+        t.Fatal("Failed House thief 2")
+    }
+}
