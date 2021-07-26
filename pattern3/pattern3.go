@@ -215,3 +215,46 @@ func MinReachEndTabular(steps []int) int {
 	}
 	return dp[len(steps)-1]
 }
+
+/*
+1,2,5,2,1,2
+
+[0, inf, inf, , inf, inf]
+i=0
+[0, 1, 1, 1, inf, inf]
+i=1
+[0, 1, 1, 1, 3, inf],
+i=2
+[0, 1, 1, 1, 3, 6]
+i=3
+[0, 1, 1, 1, 3, 3]
+i=4
+*/
+
+func MinFeeReachEnd(steps []int) int {
+	dp := make([]int, len(steps))
+	minSteps := math.MaxInt32
+
+	for i := 1; i < len(dp); i++ {
+		dp[i] = math.MaxInt32
+	}
+
+	for i := 0; i < len(steps); i++ {
+		if (i+1) >= len(steps) && (dp[i]+steps[i]) < minSteps {
+			minSteps = steps[i]
+		} else if (i+1) < len(steps) && dp[i]+steps[i] < dp[i+1] {
+			dp[i+1] = dp[i] + steps[i]
+		}
+		if (i+2) >= len(steps) && (dp[i]+steps[i]) < minSteps {
+			minSteps = steps[i] + dp[i]
+		} else if (i+3) < len(steps) && (dp[i] + steps[i]) < dp[i+2] {
+			dp[i+2] = dp[i] + steps[i]
+		}
+		if (i+3) >= len(steps) && (dp[i]+steps[i]) < minSteps {
+			minSteps = dp[i] + steps[i]
+		} else if (i+3) < len(steps) && (dp[i] + steps[i]) < dp[i+3] {
+			dp[i+3] = dp[i] + steps[i]
+		}
+	}
+	return minSteps 
+}

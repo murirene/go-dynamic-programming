@@ -69,7 +69,6 @@ func TestStairCaseReachEnd2(t *testing.T) {
 	}
 }
 
-
 func TestStairCaseReachEndTab(t *testing.T) {
 	list := []int{2, 1, 1, 1, 4}
 	if pattern3.MinReachEndTabular(list) != 3 {
@@ -81,5 +80,19 @@ func TestStairCaseReachEnd2Tab(t *testing.T) {
 	list := []int{1, 1, 3, 6, 9, 3, 0, 1, 3}
 	if pattern3.MinReachEndTabular(list) != 4 {
 		t.Fatal("Fatal 5-2 Tab")
+	}
+}
+
+func TestStairCaseMinFeeTabularT1(t *testing.T) {
+	steps := []int{1, 2, 5, 2, 1, 2}
+	if pattern3.MinFeeReachEnd(steps) != 3 {
+		t.Fatal("Failed Case 1")
+	}
+}
+
+func TestStairCaseMinFeeTabularT2(t *testing.T) {
+	steps := []int{2, 3, 4, 5}
+	if pattern3.MinFeeReachEnd(steps) != 5 {
+		t.Fatal("Failed Case 2")
 	}
 }
