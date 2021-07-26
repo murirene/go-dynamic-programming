@@ -135,43 +135,43 @@ func CountWaysTabular(n int) int {
 	return dp[n]
 }
 
-func minReachEnd(steps []int, index int) int {
+func minReachEnd(steps []int, index int, dp []int) int {
 	const NO_VALID_PATH int = -1
-
 	if index+1 == len(steps) {
 		return 0
 	}
 
-	if index+1 >= len(steps) || steps[index] == 0 {
+	if index+1 >= len(steps) {
 		return NO_VALID_PATH
 	}
 
-	// take the step
-	way1 := minReachEnd(steps, index+steps[index])
-
-	// skip the step
-	way2 := minReachEnd(steps, index+1)
-
-	if way2 == NO_VALID_PATH && way1 == NO_VALID_PATH {
-		return NO_VALID_PATH
+	if dp[index] != 0 {
+		return dp[index]
 	}
 
-	if way1 == NO_VALID_PATH {
-		return way2 + 1
-	}
+	if steps[index] == 0 {
+		dp[index] = NO_VALID_PATH
+	} else {
+		way1 := minReachEnd(steps, index+steps[index], dp)
+		way2 := minReachEnd(steps, index+1, dp)
 
-	if way2 == NO_VALID_PATH {
-		return way1 + 1
+		if way2 == NO_VALID_PATH && way1 == NO_VALID_PATH {
+			dp[index] = NO_VALID_PATH
+		} else if way1 == NO_VALID_PATH {
+			dp[index] = way2 + 1
+		} else if way2 == NO_VALID_PATH {
+			dp[index] = way1 + 1
+		} else if way1 < way2 {
+			dp[index] = way1 + 1
+		} else {
+			dp[index] = way2 + 1
+		}
 	}
-
-	if way1 < way2 {
-		return way1 + 1
-	}
-
-	return way2 + 1
+	return dp[index]
 }
 
 func MinReachEnd(steps []int) int {
-	step := minReachEnd(steps, 0)
+	dp := make([]int, len(steps))
+	step := minReachEnd(steps, 0, dp)
 	return step
 }
