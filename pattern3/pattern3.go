@@ -232,29 +232,26 @@ i=4
 */
 
 func MinFeeReachEnd(steps []int) int {
-	dp := make([]int, len(steps))
-	minSteps := math.MaxInt32
+	dp := make([]int, len(steps)+1)
 
 	for i := 1; i < len(dp); i++ {
 		dp[i] = math.MaxInt32
 	}
 
-	for i := 0; i < len(steps); i++ {
-		if (i+1) >= len(steps) && (dp[i]+steps[i]) < minSteps {
-			minSteps = steps[i]
-		} else if (i+1) < len(steps) && dp[i]+steps[i] < dp[i+1] {
-			dp[i+1] = dp[i] + steps[i]
+	dp[1] = steps[0]
+	dp[2] = steps[0]
+	dp[3] = steps[0]
+
+	for i := 3; i < len(steps); i++ {
+		dp[i+1] = steps[i] + dp[i]
+
+		if dp[i+1] > steps[i-1]+dp[i-1] {
+			dp[i+1] = steps[i-1] + dp[i-1]
 		}
-		if (i+2) >= len(steps) && (dp[i]+steps[i]) < minSteps {
-			minSteps = steps[i] + dp[i]
-		} else if (i+3) < len(steps) && (dp[i] + steps[i]) < dp[i+2] {
-			dp[i+2] = dp[i] + steps[i]
-		}
-		if (i+3) >= len(steps) && (dp[i]+steps[i]) < minSteps {
-			minSteps = dp[i] + steps[i]
-		} else if (i+3) < len(steps) && (dp[i] + steps[i]) < dp[i+3] {
-			dp[i+3] = dp[i] + steps[i]
+
+		if dp[i+1] > steps[i-2]+dp[i-2] {
+			dp[i+1] = steps[i-2] + dp[i-2]
 		}
 	}
-	return minSteps 
+	return dp[len(dp)-1]
 }
