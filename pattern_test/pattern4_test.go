@@ -25,3 +25,24 @@ func TestLPSSubsequence3(t *testing.T) {
 		t.Fatal("Failed Longest Subsequence")
 	}
 }
+
+func TestLPSubstring(t *testing.T) {
+    word := "abdbca"
+    if pattern4.LpsSubstringRecursive(word) != 3 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
+
+func TestLPSubstring2(t *testing.T) {
+    word := "cddpd"
+    if pattern4.LpsSubstringRecursive(word) != 3 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
+
+func TestLPSubstring3(t *testing.T) {
+    word := "pqr"
+    if pattern4.LpsSubstringRecursive(word) != 1 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
