@@ -80,7 +80,7 @@ ddpd        cddp
 
 */
 
-func lpsSubstringHelper(word string, i int, j int) int {
+func lpsSubstringHelper(word string, i int, j int, dp [][]int) int {
 	if i > j {
 		return 0
 	}
@@ -89,19 +89,30 @@ func lpsSubstringHelper(word string, i int, j int) int {
 		return 1
 	}
 
+    if dp[i][j] != 0 {
+        return dp[i][j]
+    }
+
 	if word[i] == word[j] {
-		palindrome := lpsSubstringHelper(word, i+1, j-1)
+		palindrome := lpsSubstringHelper(word, i+1, j-1,dp)
 		if (j - i - 1) == palindrome {
-			return palindrome + 2
+            dp[i][j] = palindrome+2
+			return dp[i][j]
 		}
 	}
 
-	palindromeLeft := lpsSubstringHelper(word, i+1, j)
-	palindromeRight := lpsSubstringHelper(word, i, j-1)
+	palindromeLeft := lpsSubstringHelper(word, i+1, j, dp)
+	palindromeRight := lpsSubstringHelper(word, i, j-1, dp)
 
-	return int(math.Max(float64(palindromeLeft), float64(palindromeRight)))
+	dp[i][j] = int(math.Max(float64(palindromeLeft), float64(palindromeRight)))
+    return dp[i][j]
 }
 
 func LpsSubstringRecursive(word string) int {
-	return lpsSubstringHelper(word, 0, len(word)-1)
+    dp := make([][]int, len(word))
+    for i:= range dp {
+        dp[i] = make([]int, len(word))
+    }
+
+	return lpsSubstringHelper(word, 0, len(word)-1, dp)
 }
