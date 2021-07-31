@@ -90,20 +90,18 @@ func lpsSubstringHelper(word string, i int, j int) int {
 	}
 
 	if word[i] == word[j] {
-		pal := lpsSubstringHelper(word, i+1, j-1)
-		if (j - i - 1) == pal {
-			return pal + 2
+		palindrome := lpsSubstringHelper(word, i+1, j-1)
+		if (j - i - 1) == palindrome {
+			return palindrome + 2
 		}
 	}
 
-	pal1 := lpsSubstringHelper(word, i+1, j)
-	pal2 := lpsSubstringHelper(word, i, j-1)
+	palindromeLeft := lpsSubstringHelper(word, i+1, j)
+	palindromeRight := lpsSubstringHelper(word, i, j-1)
 
-	return int(math.Max(float64(pal1), float64(pal2)))
+	return int(math.Max(float64(palindromeLeft), float64(palindromeRight)))
 }
 
 func LpsSubstringRecursive(word string) int {
-	m := lpsSubstringHelper(word, 0, len(word)-1)
-	fmt.Println(m)
-	return m
+	return lpsSubstringHelper(word, 0, len(word)-1)
 }
