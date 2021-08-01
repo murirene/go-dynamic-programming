@@ -89,14 +89,14 @@ func lpsSubstringHelper(word string, i int, j int, dp [][]int) int {
 		return 1
 	}
 
-    if dp[i][j] != 0 {
-        return dp[i][j]
-    }
+	if dp[i][j] != 0 {
+		return dp[i][j]
+	}
 
 	if word[i] == word[j] {
-		palindrome := lpsSubstringHelper(word, i+1, j-1,dp)
+		palindrome := lpsSubstringHelper(word, i+1, j-1, dp)
 		if (j - i - 1) == palindrome {
-            dp[i][j] = palindrome+2
+			dp[i][j] = palindrome + 2
 			return dp[i][j]
 		}
 	}
@@ -105,14 +105,36 @@ func lpsSubstringHelper(word string, i int, j int, dp [][]int) int {
 	palindromeRight := lpsSubstringHelper(word, i, j-1, dp)
 
 	dp[i][j] = int(math.Max(float64(palindromeLeft), float64(palindromeRight)))
-    return dp[i][j]
+	return dp[i][j]
 }
 
 func LpsSubstringRecursive(word string) int {
-    dp := make([][]int, len(word))
-    for i:= range dp {
-        dp[i] = make([]int, len(word))
-    }
+	dp := make([][]int, len(word))
+	for i := range dp {
+		dp[i] = make([]int, len(word))
+	}
 
 	return lpsSubstringHelper(word, 0, len(word)-1, dp)
+}
+
+func LpsSubstringTabular(word string) int {
+	dp := make([][]int, len(word))
+	for i := range dp {
+		dp[i] = make([]int, len(word))
+		dp[i][i] = 1
+	}
+
+	for i := len(word) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(word); j++ {
+			dp[i][j] = dp[i+1][j]
+			if word[i] == word[j] && (j-i-1) == dp[i+1][j-1] {
+				dp[i][j] = dp[i+1][j-1] + 2
+			} else {
+				dp[i][j] = int(math.Max(float64(dp[i+1][j]), float64(dp[i][j-1])))
+			}
+
+		}
+	}
+
+	return dp[0][len(word)-1]
 }

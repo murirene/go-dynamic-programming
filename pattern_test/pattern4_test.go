@@ -46,3 +46,25 @@ func TestLPSubstring3(t *testing.T) {
         t.Fatal("Failed Longest Substring")
     }
 }
+
+
+func TestLPSubstringT1(t *testing.T) {
+    word := "abdbca"
+    if pattern4.LpsSubstringTabular(word) != 3 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
+
+func TestLPSubstringT2(t *testing.T) {
+    word := "cddpd"
+    if pattern4.LpsSubstringTabular(word) != 3 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
+
+func TestLPSubstringT3(t *testing.T) {
+    word := "pqr"
+    if pattern4.LpsSubstringTabular(word) != 1 {
+        t.Fatal("Failed Longest Substring")
+    }
+}
