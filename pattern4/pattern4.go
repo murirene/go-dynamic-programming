@@ -34,7 +34,7 @@ func LpsSubsequence(word string) int {
 		dp[i][i] = 1
 	}
 
-	for i := len(word); i >= 0; i-- {
+	for i := len(word) - 1; i >= 0; i-- {
 		for j := i + 1; j < len(word); j++ {
 			if word[i] == word[j] {
 				size1 := dp[i+1][j-1] + 2 // palindrome include the 2
@@ -201,4 +201,37 @@ func PalindromeCount(word string) int {
 		}
 	}
 	return count
+}
+
+/*      0   1   2   3   4   5
+abdbca  a   b   d   b   c   a
+
+abdbca  1   1   1   3   3   5
+bdbca   0   1   1   3   3   3
+dbca    0   0   1   1   1   1
+bca     0   0   0   1   1   1
+ca      0   0   0   0   1   1
+a       0   0   0   0   0   1
+
+
+*/
+
+func MinDeletionsPalindrome(word string) int {
+	dp := make([][]int, len(word))
+	for i := range dp {
+		dp[i] = make([]int, len(word))
+		dp[i][i] = 1
+	}
+
+	for i := len(word) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(word); j++ {
+			if word[i] == word[j] {
+				dp[i][j] = dp[i+1][j-1] + 2
+			} else {
+				dp[i][j] = int(math.Max(float64(dp[i+1][j]), float64(dp[i][j-1])))
+			}
+		}
+	}
+
+	return len(word) - dp[0][len(word)-1]
 }

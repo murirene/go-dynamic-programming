@@ -88,3 +88,24 @@ func TestLPCountT3(t *testing.T) {
 		t.Fatal("Failed Longest Palindrome")
 	}
 }
+
+func TestMinDeletionsPalindrome(t *testing.T) {
+	word := "abdbca"
+	if pattern4.MinDeletionsPalindrome(word) != 1 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+func TestMinDeletionsPalindrome2(t *testing.T) {
+	word := "cddpd"
+	if pattern4.MinDeletionsPalindrome(word) != 2 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+func TestMinDeletionsPalindrome3(t *testing.T) {
+	word := "pqr"
+	if pattern4.MinDeletionsPalindrome(word) != 2 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
