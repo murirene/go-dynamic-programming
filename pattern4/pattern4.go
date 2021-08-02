@@ -138,6 +138,7 @@ func LpsSubstringTabular(word string) int {
 
 	return dp[0][len(word)-1]
 }
+
 /* j - i - 1
 
 counts 1 a
@@ -149,10 +150,10 @@ counts 1 a
 
 
 
-    abdbca              
-                0   1   2   3   4   5    
-                a   b   d   b   c   a   
-a,b,d,b,c,a     1   1   1   3   3   3     
+    abdbca
+                0   1   2   3   4   5
+                a   b   d   b   c   a
+a,b,d,b,c,a     1   1   1   3   3   3
   b,d,b,c,a     0   1   1   3   3   3
     d,b,c,a     0   0   1   1   1   1
       b,c,a     0   0   0   1   1   1
@@ -172,7 +173,7 @@ a,b,d,b,c,a     1   1   1   3   3   3
 
 
 
-w[i] != w[j] 
+w[i] != w[j]
 max(m[i][j-1], m[i+1][j]) + 1
 
 w[i] == w[j]  && m[i+1][j-1] - j -1 == j-i-1 // is a bigger palindrome
@@ -181,23 +182,23 @@ max(m[i][j-1], m[i+1][j] + 1 + 1
 */
 
 func PalindromeCount(word string) int {
-    dp := make([][]int, len(word))
-    for i := range dp {
-        dp[i] = make([]int, len(word))
-        dp[i][i] = 1
-    }
-    count := len(word)
-    for i:=len(word)-1;i>=0;i-- {
-        for j:=i+1; j<len(word);j++{
-            dp[i][j] = dp[i+1][j]
-
-            if word[i] == word[j] && j-i-1 == dp[i+1][j-1]{
-                dp[i][j] = dp[i+1][j-1]+2
-                count = count + 1
-            } else {
-                dp[i][j] = int(math.Max(float64(dp[i+1][j]), float64(dp[i][j-1])))
-            }
-        }
-    }
-    return count
+	dp := make([][]bool, len(word))
+	for i := range dp {
+		dp[i] = make([]bool, len(word))
+		for j := 0; j < len(word); j++ {
+			dp[i][j] = true
+		}
+	}
+	count := len(word)
+	for i := len(word) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(word); j++ {
+			if word[i] == word[j] && dp[i+1][j-1] {
+				dp[i][j] = true
+				count = count + 1
+			} else {
+				dp[i][j] = false
+			}
+		}
+	}
+	return count
 }
