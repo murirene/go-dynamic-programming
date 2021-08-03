@@ -235,3 +235,43 @@ func MinDeletionsPalindrome(word string) int {
 
 	return len(word) - dp[0][len(word)-1]
 }
+
+/*
+    abdbca        0   1   2   3   4   5
+                  a   b   d   b   c   a
+abdbca            1   1   1   3   1   1
+bdbca             0   1   1   3   1   1
+dbca              0   0   1   1   1   1
+bca               0   0   0   1   1   1
+ca                0   0   0   0   1   1
+a                 0   0   0   0   0   1
+*/
+
+func PalindromeParts(word string) int {
+	dp := make([][]int, len(word))
+	for i := range dp {
+		dp[i] = make([]int, len(word))
+		dp[i][i] = 1
+	}
+
+	for i := len(word) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(word); j++ {
+			dp[i][j] = dp[i+1][j]
+
+			if word[i] == word[j] && dp[i+1][j-1] == j-i-1 {
+				dp[i][j] = dp[i+1][j-1] + 2
+			}
+		}
+	}
+
+	index := len(word) - 1
+	partition := 0
+	for index >= 0 {
+		index = index - dp[0][index]
+
+		if index >= 0 {
+			partition = partition + 1
+		}
+	}
+	return partition
+}

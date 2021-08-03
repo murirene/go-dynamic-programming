@@ -109,3 +109,31 @@ func TestMinDeletionsPalindrome3(t *testing.T) {
 		t.Fatal("Failed Longest Palindrome")
 	}
 }
+
+func TestPalindromeParts(t *testing.T) {
+	word := "abdbca"
+	if pattern4.PalindromeParts(word) != 3 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+func TestPalindromeParts2(t *testing.T) {
+	word := "cddpd"
+	if pattern4.PalindromeParts(word) != 2 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+func TestPalindromeParts3(t *testing.T) {
+	word := "pqr"
+	if pattern4.PalindromeParts(word) != 2 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+func TestPalindromeParts4(t *testing.T) {
+	word := "pp"
+	if pattern4.PalindromeParts(word) != 0 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
