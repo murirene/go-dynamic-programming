@@ -130,9 +130,16 @@ func TestPalindromeParts3(t *testing.T) {
 		t.Fatal("Failed Longest Palindrome")
 	}
 }
-
 func TestPalindromeParts4(t *testing.T) {
 	word := "pp"
+	if pattern4.PalindromeParts(word) != 0 {
+		t.Fatal("Failed Longest Palindrome")
+	}
+}
+
+
+func TestPalindromeParts5(t *testing.T) {
+	word := "madam"
 	if pattern4.PalindromeParts(word) != 0 {
 		t.Fatal("Failed Longest Palindrome")
 	}
