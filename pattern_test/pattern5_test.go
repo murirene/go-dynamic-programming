@@ -63,3 +63,39 @@ func TestLCSs2(t *testing.T) {
 		t.Fatal("Failed Longest Common Substring " + fmt.Sprintf("%d\n", result))
 	}
 }
+
+func TestMinEdits1(t *testing.T) {
+    word1 := "abc"
+    word2 := "fbc"
+    deletes := 1
+    inserts := 1
+
+	deletes, inserts = pattern5.LcMinimalEdits(word1, word2)
+
+	if deletes != 1 && inserts != 1 {
+		t.Fatal("Failed Minimal Edits " + fmt.Sprintf("edits %d inserts %d\n", deletes, inserts))
+	}
+}
+
+
+func TestMinEdits2(t *testing.T) {
+    word1 := "abdca"
+    word2 := "cbda"
+
+	deletes, inserts := pattern5.LcMinimalEdits(word1, word2)
+
+    if deletes != 2 && inserts != 1 {
+		t.Fatal("Failed Minimal Edits " + fmt.Sprintf("edits %d inserts %d\n", deletes, inserts))
+	}
+}
+
+func TestMinEdits3(t *testing.T) {
+    word1 := "passport"
+    word2 := "ppsspt"
+
+	deletes, inserts := pattern5.LcMinimalEdits(word1, word2)
+
+    if deletes != 3 && inserts != 1 {
+		t.Fatal("Failed Minimal Edits " + fmt.Sprintf("edits %d inserts %d\n", deletes, inserts))
+	}
+}
