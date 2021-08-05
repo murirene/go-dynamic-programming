@@ -40,12 +40,8 @@ b       0   1   0   0   0           2
 d       0   0   2   0   0
 a       1   0   0   0   1
 
-passport
-ppsspt
-
-
-
-
+        p   a   s   s   p   o   r   t
+ppsspt  1   1   1   1
 */
 
 func LcSubstringTabular(word1, word2 string) int {
@@ -65,4 +61,21 @@ func LcSubstringTabular(word1, word2 string) int {
 	}
 
 	return count
+}
+
+func LcSubsequence(word1, word2 string) int {
+	dp := make([][]int, len(word1)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word2)+1)
+	}
+	for i := 1; i <= len(word1); i++ {
+		for j := 1; j <= len(word2); j++ {
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			} else {
+				dp[i][j] = dp[i-1][j]
+			}
+		}
+	}
+	return dp[len(word1)][len(word2)]
 }

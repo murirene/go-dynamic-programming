@@ -43,3 +43,23 @@ func TestLCST2(t *testing.T) {
 		t.Fatal("Failed Longest Common Substring " + fmt.Sprintf("%d\n", result))
 	}
 }
+
+
+func TestLCSsT1(t *testing.T) {
+	word1 := "abdca"
+	word2 := "cbda"
+	result := pattern5.LcSubsequence(word1, word2)
+	if result != 3 {
+		t.Fatal("Failed Longest Common Substring " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+func TestLCSs2(t *testing.T) {
+	word1 := "passport"
+	word2 := "ppsspt"
+	result := pattern5.LcSubsequence(word1, word2)
+
+	if result != 5 {
+		t.Fatal("Failed Longest Common Substring " + fmt.Sprintf("%d\n", result))
+	}
+}
