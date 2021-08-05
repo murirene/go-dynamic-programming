@@ -30,3 +30,39 @@ func LcSubstring(word1, word2 string) int {
 	dp := make(map[string]int)
 	return lcSubstringHelper(word1, word2, 0, 0, 0, dp)
 }
+
+/*
+abdca
+cbda                            count
+        a   b   d   c   a
+c       0   0   0   1   0           1
+b       0   1   0   0   0           2
+d       0   0   2   0   0
+a       1   0   0   0   1
+
+passport
+ppsspt
+
+
+
+
+*/
+
+func LcSubstringTabular(word1, word2 string) int {
+	count := 0
+	dp := make([][]int, len(word1)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word2)+1)
+	}
+
+	for i := 1; i <= len(word1); i++ {
+		for j := 1; j <= len(word2); j++ {
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+				count = int(math.Max(float64(count), float64(dp[i][j])))
+			}
+		}
+	}
+
+	return count
+}
