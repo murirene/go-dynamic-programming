@@ -138,3 +138,68 @@ func LcMinimalEdits(word1, word2 string) (int, int) {
 	deletes = len(word2) - common
 	return inserts, deletes
 }
+
+/*
+    4   ,2  ,3  ,6  ,10 ,1  ,12
+4   4   4   4   6   10   10  12     4
+2   0   2   3   4   5   0   6      5
+3   0   0   0   0   0   0   0
+6   0   0   0   0   0   0   0
+
+i=0, j=1, +1
+    0  1  2  3  4   5  6
+    4, 2, 3, 6, 10, 1, 12
+    i, 0, j, 1, 4, 2  <
+    i: 0, j: 2, 4, 3  <
+    i: 0, j: 3, 4, 6  > + 1
+    i: 3, j: 4, 6, 10, > + 1
+    i: 4, j: 5, 10, 1 <
+    i: 4, j: 6, 10, 12 > + 1
+    i: 6, j: 7, 12, Out of index return 0 (4)
+
+    if  4 > 2 then skip to 3 until the end is reached. rturn the max
+
+    2, 3, 6, 10, 1, 12
+     0, 1,  2, 3, 4
+    -4, 10, 3, 7, 15
+
+    i: 0, j: 1 , > + 1
+    i: 1, j: 2 , <
+
+2, 3
+*/
+
+func LisHelper(list []int, i, j int) int {
+	if j == len(list) {
+		return 0
+	}
+
+	include := 0
+	if i == -1 || list[i] < list[j] {
+		include = LisHelper(list, j, j+1) + 1
+	}
+
+	exclude := LisHelper(list, i, j+1)
+	return int(math.Max(float64(include), float64(exclude)))
+}
+
+func Lis(list []int) int {
+	return LisHelper(list, -1, 0)
+}
+
+func LisTabular(list []int) int {
+	dp := make([]int, len(list))
+	for i := range dp {
+		dp[i] = 1
+	}
+
+	for i := 1; i < len(list); i++ {
+		for j := 0; j < i; j++ {
+			if list[j] < list[i] && dp[j] == dp[i] {
+				dp[i] += 1
+			}
+		}
+	}
+
+	return dp[len(list)-1]
+}
