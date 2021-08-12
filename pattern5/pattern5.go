@@ -203,3 +203,37 @@ func LisTabular(list []int) int {
 
 	return dp[len(list)-1]
 }
+
+func LongestIncreasingSequence(list []int) int {
+	dp := make([]int, len(list))
+	for i := range dp {
+		dp[i] = 1
+	}
+
+	for i := 0; i < len(list); i++ {
+		for j := 0; j < i; j++ {
+			if list[i] > list[j] && dp[i] <= dp[j] {
+				dp[i] += 1
+			}
+		}
+	}
+
+	return dp[len(list)-1]
+}
+
+func LongestSumSequence(list []int) int {
+	dp := make([]int, len(list))
+	for i := range dp {
+		dp[i] = list[i]
+	}
+
+	for i := 1; i < len(list); i++ {
+		for j := 0; j < i; j++ {
+			if list[i] > list[j] && (dp[i]-list[i]) < dp[j] {
+				dp[i] = list[i] + dp[j]
+			}
+		}
+	}
+
+	return dp[len(list)-1]
+}

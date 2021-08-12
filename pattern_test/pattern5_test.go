@@ -133,3 +133,41 @@ func TestLongestIncreasingSubsequenceTab2(t *testing.T) {
 		t.Fatal("Failed Longest Increasing Subsequence Tab " + fmt.Sprintf("%d\n", result))
 	}
 }
+
+
+func TestLongestIncreasingSubsequenceRedux(t *testing.T) {
+	list := []int{4, 2, 3, 6, 10, 1, 12}
+	result := pattern5.LongestIncreasingSequence(list)
+
+	if result != 5 {
+		t.Fatal("Failed Longest Increasing Subsequence Tab " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+func TestLongestIncreasingSubsequenceRedux2(t *testing.T) {
+	list := []int{-4, 10, 3, 7, 15}
+	result := pattern5.LongestIncreasingSequence(list)
+
+	if result != 4 {
+		t.Fatal("Failed Longest Increasing Subsequence Tab " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+
+func TestLongestSumSequence(t *testing.T) {
+    list := []int{4, 1, 3, 6, 10, 1, 12}
+	result := pattern5.LongestSumSequence(list)
+
+	if result != 32 {
+		t.Fatal("Failed Longest Sum Subsequence Tab " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+func TestLongestSumSubsequence2(t *testing.T) {
+	list := []int{-4, 10, 3, 7, 15}
+	result := pattern5.LongestSumSequence(list)
+
+	if result != 25 {
+		t.Fatal("Failed Longest Sum Subsequence Tab " + fmt.Sprintf("%d\n", result))
+	}
+}
