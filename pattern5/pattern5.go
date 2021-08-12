@@ -31,19 +31,6 @@ func LcSubstring(word1, word2 string) int {
 	return lcSubstringHelper(word1, word2, 0, 0, 0, dp)
 }
 
-/*
-abdca
-cbda                            count
-        a   b   d   c   a
-c       0   0   0   1   0           1
-b       0   1   0   0   0           2
-d       0   0   2   0   0
-a       1   0   0   0   1
-
-        p   a   s   s   p   o   r   t
-ppsspt  1   1   1   1
-*/
-
 func LcSubstringTabular(word1, word2 string) int {
 	count := 0
 	dp := make([][]int, len(word1)+1)
@@ -80,40 +67,6 @@ func LcSubsequence(word1, word2 string) int {
 	return dp[len(word1)][len(word2)]
 }
 
-/*
-    lcs = 2
-    s1 - lcs = deletes 1
-    s2-lcs = inserts 1
-
-
-  passport
-  ppsspt
-
-             p   a  s   s  p   o   r   t
-p            1   1  1   1  1   1   1   1   0
-p            1   1  1   1  2   2   2   2   0
-s            1   1  2   2   2   2  2   2   0
-s            1   1  2   3   3   3   3   3   0
-p            1   1  2   3   4   4   4   4   0
-t            1   1  2   3   4   4   4   5   0
-
-
-i
-p            0   0  0   0   0   0   0   0   0
-p            0   0  0   0   0   0   0   0   0
-p            0   0  0   0   0   0   0   0   0
-p            0   0  0   0   0   0   0   0   0
-p            0   0  0   0   0   0   0   0   0
-s        0   0   1   0   1   0
-s        0   0   1   2   1   0
-a        0   0   1   2   2   3
-        0   0   0   0   0   0
-
-    5-3 = 2 deletes
-    4-3 - 1 insert
-    3
-*/
-
 func LcMinimalEdits(word1, word2 string) (int, int) {
 	inserts := 0
 	deletes := 0
@@ -138,36 +91,6 @@ func LcMinimalEdits(word1, word2 string) (int, int) {
 	deletes = len(word2) - common
 	return inserts, deletes
 }
-
-/*
-    4   ,2  ,3  ,6  ,10 ,1  ,12
-4   4   4   4   6   10   10  12     4
-2   0   2   3   4   5   0   6      5
-3   0   0   0   0   0   0   0
-6   0   0   0   0   0   0   0
-
-i=0, j=1, +1
-    0  1  2  3  4   5  6
-    4, 2, 3, 6, 10, 1, 12
-    i, 0, j, 1, 4, 2  <
-    i: 0, j: 2, 4, 3  <
-    i: 0, j: 3, 4, 6  > + 1
-    i: 3, j: 4, 6, 10, > + 1
-    i: 4, j: 5, 10, 1 <
-    i: 4, j: 6, 10, 12 > + 1
-    i: 6, j: 7, 12, Out of index return 0 (4)
-
-    if  4 > 2 then skip to 3 until the end is reached. rturn the max
-
-    2, 3, 6, 10, 1, 12
-     0, 1,  2, 3, 4
-    -4, 10, 3, 7, 15
-
-    i: 0, j: 1 , > + 1
-    i: 1, j: 2 , <
-
-2, 3
-*/
 
 func LisHelper(list []int, i, j int) int {
 	if j == len(list) {
