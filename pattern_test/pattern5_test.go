@@ -134,7 +134,6 @@ func TestLongestIncreasingSubsequenceTab2(t *testing.T) {
 	}
 }
 
-
 func TestLongestIncreasingSubsequenceRedux(t *testing.T) {
 	list := []int{4, 2, 3, 6, 10, 1, 12}
 	result := pattern5.LongestIncreasingSequence(list)
@@ -153,9 +152,8 @@ func TestLongestIncreasingSubsequenceRedux2(t *testing.T) {
 	}
 }
 
-
 func TestLongestSumSequence(t *testing.T) {
-    list := []int{4, 1, 3, 6, 10, 1, 12}
+	list := []int{4, 1, 3, 6, 10, 1, 12}
 	result := pattern5.LongestSumSequence(list)
 
 	if result != 32 {
@@ -169,5 +167,25 @@ func TestLongestSumSubsequence2(t *testing.T) {
 
 	if result != 25 {
 		t.Fatal("Failed Longest Sum Subsequence Tab " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+func TestLongestCommonSuperSequence(t *testing.T) {
+	word1 := "abcf"
+	word2 := "bdcf"
+	result := pattern5.ShortestCommonSuperSequence(word1, word2)
+
+	if result != 5 {
+		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%d\n", result))
+	}
+}
+
+func TestLongestCommonSuperSubsequence2(t *testing.T) {
+	word1 := "dynamic"
+	word2 := "programming"
+	result := pattern5.ShortestCommonSuperSequence(word1, word2)
+
+	if result != 15 {
+		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%d\n", result))
 	}
 }

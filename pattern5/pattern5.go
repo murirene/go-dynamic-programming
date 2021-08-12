@@ -160,3 +160,52 @@ func LongestSumSequence(list []int) int {
 
 	return dp[len(list)-1]
 }
+
+/*
+    a   b   c   f
+    0   0   0   0
+b   0   1   1   1
+d   0   1   1   1
+c   0   1   2   2
+f   0   1   2   3
+
+dp[i][j] = max(dp[i-1][j],dp[i][j-1])
+
+if word1[i] == word2[j]
+dp[i][j] = dp[i-1][j-1]+1
+
+common := dp[len(word1)-1][len(word2)-1]
+return common + len(word1)-common + len(word2) - common
+
+    p   r   o   g   r   a   m   m   i   n   g
+d   0   0   0   0   0   0   0   0   0   0   0
+y   0   0   0   0   0   0   0   0   0   0   0
+n   0   0   0   0   0   0   0   0   0   1   1
+a   0   0   0   0   0   1   1   1   1   1   1
+m   0   0   0   0   0   1   2   2   2   2   2
+i   0   0   0   0   0   1   2   2   3   3   3
+c   0   0   0   0   0   1   2   2   3   3   3
+
+3 + 4 + 8 = 15
+*/
+
+func ShortestCommonSuperSequence(word1, word2 string) int {
+	dp := make([][]int, len(word1)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word2)+1)
+	}
+
+	for i := 1; i <= len(word1); i++ {
+		for j := 1; j <= len(word2); j++ {
+			dp[i][j] = int(math.Max(float64(dp[i-1][j]), float64(dp[i][j-1])))
+
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			}
+		}
+	}
+
+	common := dp[len(word1)][len(word2)]
+
+	return common + len(word1) - common + len(word2) - common
+}
