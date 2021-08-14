@@ -209,3 +209,37 @@ func ShortestCommonSuperSequence(word1, word2 string) int {
 
 	return common + len(word1) - common + len(word2) - common
 }
+
+func ShortestSuperSequenceRecursive(word1, word2 string, i, j int) int {
+	if len(word1) == i {
+		return len(word2) - j
+	}
+
+	if len(word2) == j {
+		return len(word1) - i
+	}
+
+	if word1[i] == word2[j] {
+		return ShortestSuperSequenceRecursive(word1, word2, i+1, j+1) + 1
+	}
+
+	c1 := ShortestSuperSequenceRecursive(word1, word2, i, j+1) + 1
+	c2 := ShortestSuperSequenceRecursive(word1, word2, i+1, j) + 1
+
+	return int(math.Min(float64(c1), float64(c2)))
+}
+
+func MinimumDeletes(list []int, i, j int) int {
+	if len(list) == j {
+		return 0
+	}
+
+	c1 := math.MaxInt32
+	if i == -1 || list[i] < list[j] {
+		c1 = MinimumDeletes(list, j, j+1)
+	}
+
+	c2 := MinimumDeletes(list, i, j+1) + 1
+
+	return int(math.Min(float64(c1), float64(c2)))
+}
