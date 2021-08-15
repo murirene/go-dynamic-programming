@@ -188,7 +188,7 @@ c   0   0   0   0   0   1   2   2   3   3   3
 
 3 + 4 + 8 = 15
 */
-
+/*
 func ShortestCommonSuperSequence(word1, word2 string) int {
 	dp := make([][]int, len(word1)+1)
 	for i := range dp {
@@ -209,7 +209,7 @@ func ShortestCommonSuperSequence(word1, word2 string) int {
 
 	return common + len(word1) - common + len(word2) - common
 }
-
+*/
 func ShortestSuperSequenceRecursive(word1, word2 string, i, j int) int {
 	if len(word1) == i {
 		return len(word2) - j
@@ -242,4 +242,37 @@ func MinimumDeletes(list []int, i, j int) int {
 	c2 := MinimumDeletes(list, i, j+1) + 1
 
 	return int(math.Min(float64(c1), float64(c2)))
+}
+
+func shortestCommonSequence(word1, word2 string, i, j int, dp [][]int) int {
+	if len(word2) == j {
+		return len(word1) - i
+	}
+
+	if len(word1) == i {
+		return len(word2) - j
+	}
+    
+    if dp[i][j] != 0 {
+        return dp[i][j]
+    }
+
+	if word1[i] == word2[j] {
+		return shortestCommonSequence(word1, word2, i+1, j+1, dp) + 1
+	}
+
+	cs1 := shortestCommonSequence(word1, word2, i, j+1, dp) + 1
+	cs2 := shortestCommonSequence(word1, word2, i+1, j, dp) + 1
+    
+	dp[i][j] = int(math.Min(float64(cs1), float64(cs2)))
+
+    return dp[i][j]
+}
+
+func ShortestCommonSuperSequence(word1, word2 string) int {
+    dp := make([][]int, len(word1))
+    for i := range dp {
+        dp[i] = make([]int, len(word2))
+    }
+    return shortestCommonSequence(word1, word2, 0, 0, dp)
 }
