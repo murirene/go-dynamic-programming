@@ -299,3 +299,18 @@ func ShortestSuperCommonSequenceTabular(word1, word2 string) int {
 
 	return dp[len(word1)][len(word2)]
 }
+
+func MinimumDeletionsSortedSequence(list []int, i, j int) int {
+	if len(list) == j {
+		return 0
+	}
+
+	m := math.MaxInt32
+	if i == -1 || list[i] < list[j] {
+		m = MinimumDeletionsSortedSequence(list, j, j+1)
+	}
+
+	c1 := MinimumDeletionsSortedSequence(list, i, j+1) + 1
+
+	return int(math.Min(float64(m), float64(c1)))
+}

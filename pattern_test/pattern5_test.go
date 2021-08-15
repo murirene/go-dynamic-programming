@@ -262,23 +262,23 @@ func TestLCSRecursice7(t *testing.T) {
 
 func TestMinimumDeletes(t *testing.T) {
 	list := []int{4, 2, 3, 6, 10, 1, 12}
-	result := pattern5.MinimumDeletes(list, -1, 0)
+	result := pattern5.MinimumDeletionsSortedSequence(list, -1, 0)
 	if result != 2 {
-		t.Fatal("Failed problem 1 " + fmt.Sprintf("%d\n", result))
+		t.Fatal("Failed Minimum Deletions for a sorted sequence " + fmt.Sprintf("%v %d\n", list, result))
 	}
 }
 
 func TestMinimumDeletes2(t *testing.T) {
 	list := []int{-4, 10, 3, 7, 15}
-	result := pattern5.MinimumDeletes(list, -1, 0)
+	result := pattern5.MinimumDeletionsSortedSequence(list, -1, 0)
 	if result != 1 {
-		t.Fatal("Failed problem 1 " + fmt.Sprintf("%d\n", result))
+		t.Fatal("Failed Minimum Deletions for a sorted sequence " + fmt.Sprintf("%v %d\n", list, result))
 	}
 }
 
 func TestMinimumDeletes3(t *testing.T) {
 	list := []int{3, 2, 1, 0}
-	result := pattern5.MinimumDeletes(list, -1, 0)
+	result := pattern5.MinimumDeletionsSortedSequence(list, -1, 0)
 	if result != 3 {
 		t.Fatal("Failed problem 1 " + fmt.Sprintf("%d\n", result))
 	}
