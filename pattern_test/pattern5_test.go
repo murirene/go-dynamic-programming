@@ -173,20 +173,20 @@ func TestLongestSumSubsequence2(t *testing.T) {
 func TestLongestCommonSuperSequence(t *testing.T) {
 	word1 := "abcf"
 	word2 := "bdcf"
-	result := pattern5.ShortestCommonSuperSequence(word1, word2)
+	result := pattern5.ShortestSuperCommonSequenceTabular(word1, word2)
 
 	if result != 5 {
-		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%d\n", result))
+		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%s %s %d\n", word1, word2, result))
 	}
 }
 
 func TestLongestCommonSuperSubsequence2(t *testing.T) {
 	word1 := "dynamic"
 	word2 := "programming"
-	result := pattern5.ShortestCommonSuperSequence(word1, word2)
+	result := pattern5.ShortestSuperCommonSequenceTabular(word1, word2)
 
 	if result != 15 {
-		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%d\n", result))
+		t.Fatal("Failed Longest Common Super Subsequence " + fmt.Sprintf("%s %s %d\n", word1, word2, result))
 	}
 }
 
