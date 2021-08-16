@@ -314,3 +314,22 @@ func MinimumDeletionsSortedSequence(list []int, i, j int) int {
 
 	return int(math.Min(float64(m), float64(c1)))
 }
+
+func MinimumDeletionsSortedSequenceTabular(list []int) int {
+	dp := make([]int, len(list))
+	for i := range dp {
+		dp[i] = 1
+	}
+
+	max := dp[0] 
+	for i := 0; i < len(list); i++ {
+		for j := 0; j < i; j++ {
+			if list[j] < list[i] && dp[j] >= dp[i] {
+				dp[i] += 1
+				max = int(math.Max(float64(max), float64(dp[i])))
+			}
+		}
+	}
+
+	return len(list) - max
+}

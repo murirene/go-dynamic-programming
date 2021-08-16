@@ -301,3 +301,28 @@ func TestShortestCommonSuperSequence2(t *testing.T) {
 		t.Fatal("Failed ShortestCommonSuperSequence " + fmt.Sprintf("%s %s = %d\n", word1, word2, result))
 	}
 }
+
+func TestMinimumDeletesT(t *testing.T) {
+	list := []int{4, 2, 3, 6, 10, 1, 12}
+	result := pattern5.MinimumDeletionsSortedSequenceTabular(list)
+	if result != 2 {
+		t.Fatal("Failed Minimum Deletions for a sorted sequence " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+func TestMinimumDeletesT2(t *testing.T) {
+	list := []int{-4, 10, 3, 7, 15}
+	result := pattern5.MinimumDeletionsSortedSequenceTabular(list)
+	if result != 1 {
+		t.Fatal("Failed Minimum Deletions for a sorted sequence " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+func TestMinimumDeletesT3(t *testing.T) {
+	list := []int{3, 2, 1, 0}
+	result := pattern5.MinimumDeletionsSortedSequenceTabular(list)
+	if result != 3 {
+		t.Fatal("Failed Minimum Deleitions for a sorted sequence  " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
