@@ -378,3 +378,38 @@ func LongestRepeatingSequence(word string) int {
 
 	return dp[length][length]
 }
+
+/*
+    b   a   x   m   x
+a   0   1   1   1   1
+x   0   0   1   1   2
+
+    t   o   m   o   r   r   o   w
+t   1   1   1   1   1   1   1   1
+o   0   1   1   2   2   2   3   3
+r   0   0   0   0   2   4   4   4
+
+
+dp[i][j] = dp[i][j-1]
+if word[i] == word[j]
+dp[i][j] = dp[i][j] + dp[i-1][j-1]
+
+*/
+
+func SubSequencePatternMatching(word string, pattern string) int {
+	dp := make([][]int, len(pattern)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word)+1)
+	}
+
+	for i := 1; i <= len(pattern); i++ {
+		for j := 1; j <= len(word); j++ {
+			dp[i][j] = dp[i][j-1]
+			if word[j-1] == pattern[i-1] {
+				dp[i][j] = int(math.Max(float64(1), float64(dp[i][j-1]+dp[i-1][j-1])))
+			}
+		}
+	}
+
+	return dp[len(pattern)][len(word)]
+}

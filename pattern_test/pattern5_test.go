@@ -349,3 +349,22 @@ func TestLongestRepeatingSequence3(t *testing.T) {
 		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s = %d\n", word, result))
 	}
 }
+
+func TestSubsequencePatternMatching(t *testing.T) {
+	word := "baxmx"
+    pattern := "ax"
+	result := pattern5.SubSequencePatternMatching(word, pattern)
+	if result != 2 {
+		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s %s = %d\n", word, pattern, result))
+	}
+}
+
+func TestSubsequencePatternMatching2(t *testing.T) {
+	word := "tomorrow"
+    pattern := "tor"
+	result := pattern5.SubSequencePatternMatching(word, pattern)
+	if result != 4 {
+		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s %s = %d\n", word, pattern, result))
+	}
+}
+
