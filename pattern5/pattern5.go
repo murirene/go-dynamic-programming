@@ -321,7 +321,7 @@ func MinimumDeletionsSortedSequenceTabular(list []int) int {
 		dp[i] = 1
 	}
 
-	max := dp[0] 
+	max := dp[0]
 	for i := 0; i < len(list); i++ {
 		for j := 0; j < i; j++ {
 			if list[j] < list[i] && dp[j] >= dp[i] {
@@ -332,4 +332,49 @@ func MinimumDeletionsSortedSequenceTabular(list []int) int {
 	}
 
 	return len(list) - max
+}
+
+/*
+         t   o   m   o   r   r   o   w
+     0   0   0   0   0   0   0   0   0
+t    0   0   0   0   0   0   0   0   0
+o    0   0   0   0   1   1   1   1   1
+m    0   0   0   0   1   1   1   1   1
+o    0   0   0   0   1   1   1   2   2
+r    0   0   0   0   1   1   2   2   2
+r    0   0   0   0   1   1   2   2   2
+o    0   0   0   0   1   1   2   2   2
+w    0   0   0   0   1   1   2   2   2
+
+
+f
+
+for i = 1; i<len(word)
+for j=i+1; j<len(word)
+dp[i][j] = math.max(dp[i-1][j], dp[i][j-1])
+
+if word[i] == word[j]
+dp[i][j] = dp[i-1][j-1]+1
+
+*/
+
+func LongestRepeatingSequence(word string) int {
+	dp := make([][]int, len(word)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word)+1)
+	}
+
+	for i := 1; i <= len(word); i++ {
+		for j := i + 1; j <= len(word); j++ {
+			dp[i][j] = int(math.Max(float64(dp[i-1][j]), float64(dp[i][j-1])))
+			if word[i-1] == word[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			}
+		}
+	}
+
+	length := len(word)
+	dp[length][length] = int(math.Max(float64(dp[length-1][length]), float64(dp[length][length-1])))
+
+	return dp[length][length]
 }

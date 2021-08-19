@@ -326,3 +326,26 @@ func TestMinimumDeletesT3(t *testing.T) {
 	}
 }
 
+func TestLongestRepeatingSequence(t *testing.T) {
+	word := "tomorrow"
+	result := pattern5.LongestRepeatingSequence(word)
+	if result != 2 {
+		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s = %d\n", word, result))
+	}
+}
+
+func TestLongestRepeatingSequence2(t *testing.T) {
+	word := "aabdbcec"
+	result := pattern5.LongestRepeatingSequence(word)
+	if result != 3 {
+		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s = %d\n", word, result))
+	}
+}
+
+func TestLongestRepeatingSequence3(t *testing.T) {
+	word := "fmff"
+	result := pattern5.LongestRepeatingSequence(word)
+	if result != 2 {
+		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s = %d\n", word, result))
+	}
+}
