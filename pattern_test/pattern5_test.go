@@ -367,4 +367,43 @@ func TestSubsequencePatternMatching2(t *testing.T) {
 		t.Fatal("Failed Longest Repeating Sequence " + fmt.Sprintf("%s %s = %d\n", word, pattern, result))
 	}
 }
+/*
+func  TestLongestBitonicSubsequence(t *testing.T){
+	list := []int{4,2,3,6,10,1,12}
+	result := pattern5.LongestBitonicSubsequence(list, -1, 0, 0)
+
+	if result != 5 {
+		t.Fatal("Failed LongestBitonic Subsequence " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+
+func  TestLongestBitonicSubsequence2(t *testing.T){
+	list := []int{4,2,5,9,7,6,10,3,1}
+	result := pattern5.LongestBitonicSubsequence(list, -1, 0, 0)
+
+	if result != 7 {
+		t.Fatal("Failed LongestBitonic Subsequence " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}*/
+
+
+func  TestLongestBitonicSubsequenceTab(t *testing.T){
+	list := []int{4,2,3,6,10,1,12}
+	result := pattern5.LongestBitonicSubsequenceTab(list)
+
+	if result != 5 {
+		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+
+func  TestLongestBitonicSubsequenceTab2(t *testing.T){
+	list := []int{4,2,5,9,7,6,10,3,1}
+	result := pattern5.LongestBitonicSubsequenceTab(list)
+
+	if result != 7 {
+		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
 
