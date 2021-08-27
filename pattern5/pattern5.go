@@ -427,15 +427,12 @@ func LongestBitonicSubsequence(list []int, p, i, j int) int {
 
 	if p == -1 || (list[p] <= list[i] && list[i] <= list[j]) {
 		c1 = LongestBitonicSubsequence(list, i, j, j+1) + 1
-	}
-
-	if list[i] > list[j] {
+	} else if list[i] > list[j] {
 		c1 = LongestBitonicSubsequence(list, i, j, j+1) + 1
 	}
 
 	c2 := LongestBitonicSubsequence(list, p, i, j+1)
 
-	fmt.Printf("p=%d i=%d j=%d include=%d exclude=%d\n", p, i, j, c1, c2)
 	return int(math.Max(float64(c1), float64(c2)))
 }
 
@@ -452,6 +449,29 @@ func LongestBitonicSubsequenceTab(list []int) int {
 		for j := 0; j < i; j++ {
 			if p == -1 || (list[i] > list[j] && list[j] > list[p]) ||
 				(list[i] < list[j]) {
+				dp[i] = int(math.Max(float64(dp[i]), float64(dp[j]+1)))
+				max = int(math.Max(float64(max), float64(dp[i])))
+			}
+			p = j
+		}
+	}
+
+	return max
+}
+
+func LongestAlternatingSubsequenceTab(list []int) int {
+	max := 1
+	dp := make([]int, len(list))
+
+	for i := range dp {
+		dp[i] = 1
+	}
+
+	for i := 0; i < len(list); i++ {
+		p := -1
+		for j := 0; j < i; j++ {
+			if p == -1 || (list[j] > list[i] && list[j] > list[p]) ||
+				(list[j] < list[i] && list[j] < list[p]) {
 				dp[i] = int(math.Max(float64(dp[i]), float64(dp[j]+1)))
 				max = int(math.Max(float64(max), float64(dp[i])))
 			}

@@ -376,8 +376,7 @@ func  TestLongestBitonicSubsequence(t *testing.T){
 		t.Fatal("Failed LongestBitonic Subsequence " + fmt.Sprintf("%v %d\n", list, result))
 	}
 }
-
-
+*/
 func  TestLongestBitonicSubsequence2(t *testing.T){
 	list := []int{4,2,5,9,7,6,10,3,1}
 	result := pattern5.LongestBitonicSubsequence(list, -1, 0, 0)
@@ -385,8 +384,7 @@ func  TestLongestBitonicSubsequence2(t *testing.T){
 	if result != 7 {
 		t.Fatal("Failed LongestBitonic Subsequence " + fmt.Sprintf("%v %d\n", list, result))
 	}
-}*/
-
+}
 
 func  TestLongestBitonicSubsequenceTab(t *testing.T){
 	list := []int{4,2,3,6,10,1,12}
@@ -407,3 +405,29 @@ func  TestLongestBitonicSubsequenceTab2(t *testing.T){
 	}
 }
 
+func TestLongestAlternatingSubsequenceTab(t *testing.T){
+	list := []int{1,2,3,4}
+	result := pattern5.LongestAlternatingSubsequenceTab(list)
+
+	if result != 2 {
+		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+func TestLongestAlternatingSubsequenceTab2(t *testing.T){
+	list := []int{3,2,1,4}
+	result := pattern5.LongestAlternatingSubsequenceTab(list)
+
+	if result != 3 {
+		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
+
+func TestLongestAlternatingSubsequenceTab3(t *testing.T){
+	list := []int{1,3,2,4}
+	result := pattern5.LongestAlternatingSubsequenceTab(list)
+
+	if result != 4 {
+		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
+	}
+}
