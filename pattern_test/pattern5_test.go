@@ -431,3 +431,30 @@ func TestLongestAlternatingSubsequenceTab3(t *testing.T){
 		t.Fatal("Failed LongestBitonic Subsequence Tab " + fmt.Sprintf("%v %d\n", list, result))
 	}
 }
+
+func TestEdit1(t *testing.T) {
+	word1 := "bat"
+	word2 := "but"
+	result := pattern5.Edit(word1, word2)
+	if result != 1 {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s = %d\n", word1, word2, result))
+	}
+}
+
+func TestEdit2(t *testing.T) {
+	word1 := "abdca"
+	word2 := "cbda"
+	result := pattern5.Edit(word1, word2)
+	if result != 2 {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s = %d\n", word1, word2, result))
+	}
+}
+
+func TestEdit3(t *testing.T) {
+	word1 := "passpot"
+	word2 := "ppsspqrt"
+	result := pattern5.Edit(word1, word2)
+	if result != 3 {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s = %d\n", word1, word2, result))
+	}
+}

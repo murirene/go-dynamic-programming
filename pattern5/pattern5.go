@@ -481,3 +481,35 @@ func LongestAlternatingSubsequenceTab(list []int) int {
 
 	return max
 }
+
+func Edit(word1, word2 string) int {
+	dp := make([][]int, len(word1)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(word2)+1)
+	}
+
+	for i := 1; i <= len(word1); i++ {
+		for j := 1; j <= len(word2); j++ {
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			} else {
+				dp[i][j] = int(math.Max(float64(dp[i-1][j]), float64(dp[i][j-1])))
+			}
+		}
+	}
+
+	lcs := dp[len(word1)][len(word2)]
+
+	deletes := 0
+	inserts := 0
+	replace := 0
+	if len(word1) > len(word2) {
+		deletes = len(word1) - len(word2)
+		replace = len(word2) - lcs
+	} else {
+		inserts = len(word2) - len(word1)
+		replace = len(word1) - lcs
+	}
+
+	return deletes + replace + inserts
+}
