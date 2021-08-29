@@ -513,3 +513,40 @@ func Edit(word1, word2 string) int {
 
 	return deletes + replace + inserts
 }
+
+func Interweaving(word1, word2, target string) bool {
+	dp := make([][]bool, len(word1)+1)
+	for i := range dp {
+		dp[i] = make([]bool, len(word2)+1)
+	}
+
+	dp[0][0] = true
+
+	for i := 1; i <= len(word2); i++ {
+		if target[i-1] == word2[i-1] {
+			dp[0][i] = dp[0][i-1]
+		}
+	}
+
+	for i := 1; i <= len(word1); i++ {
+		if target[i-1] == word1[i-1] {
+			dp[i][0] = dp[i-1][0]
+		}
+	}
+
+	p := 0
+	for i := 0; i < len(word1); i++ {
+		p += 1
+		for j := 0; j < len(word2); j++ {
+			if word1[i] == target[p+j] {
+				dp[i+1][j+1] = dp[i][j+1]
+			}
+
+			if word2[j] == target[p+j] {
+				dp[i+1][j+1] = dp[i+1][j] || dp[i+1][j+1]
+			}
+		}
+	}
+
+	return dp[len(word1)][len(word2)]
+}

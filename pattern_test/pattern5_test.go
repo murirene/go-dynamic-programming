@@ -458,3 +458,43 @@ func TestEdit3(t *testing.T) {
 		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s = %d\n", word1, word2, result))
 	}
 }
+
+func TestInterweaving1(t *testing.T) {
+	word1 := "abd"
+	word2 := "cef"
+    target := "abcdef"
+	result := pattern5.Interweaving(word1, word2, target)
+	if result != true {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s %s\n", word1, word2, target))
+	}
+}
+
+func TestInterweaving2(t *testing.T) {
+	word1 := "abd"
+	word2 := "cef"
+    target := "adcbef"
+	result := pattern5.Interweaving(word1, word2, target)
+	if result != false {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s %s\n", word1, word2, target))
+	}
+}
+
+func TestInterweaving3(t *testing.T) {
+	word1 := "abc"
+	word2 := "def"
+    target := "abdccf"
+	result := pattern5.Interweaving(word1, word2, target)
+	if result != false {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s %s\n", word1, word2, target))
+	}
+}
+
+func TestInterweaving4(t *testing.T) {
+	word1 := "abcdef"
+	word2 := "mnop"
+    target := "mnaobcdepf"
+	result := pattern5.Interweaving(word1, word2, target)
+	if result != true {
+		t.Fatal("Failed Edit " + fmt.Sprintf("%s %s %s\n", word1, word2, target))
+	}
+}
